@@ -76,7 +76,7 @@ if [[ $# -eq 0 ]]; then
     GET_HELP
     exit 1
 else
-  while getopts ":a:A:b:B:c:C:e:h:i:I:m:N:p:s:Z:T:L:k:u:w" opt; do
+  while getopts ":a:A:b:B:c:C:e:h:i:I:m:N:p:s:Z:T:L:u:w" opt; do
     case ${opt} in
       a) ATTACHMENT="true" ;;
       A) AUTHOR="${OPTARG}" ;;
@@ -100,26 +100,10 @@ else
       Z) TEXT="${OPTARG}" ;;
       T) TITLE="${OPTARG}" ;;
       L) TITLELINK="${OPTARG}" ;;
-      k) TOKEN="${OPTARG}" ;;
       u) USERNAME="${OPTARG}" ;;
       w) WEBHOOK="${OPTARG}" ;;
       esac
       done
-fi
-
-# ----------
-# Check for Token
-# ----------
-echo "${SLACK_TOKEN}"
-# Default TOKEN to post messages
-if [[ -n ${TOKEN} ]]; then
-  echo "INFO: The Slack API TOKEN was passed via the command line (-k)"
-elif [[ -n ${SLACK_TOKEN} ]]; then
-  echo "INFO: The Slack API TOKEN was set as a system variable"
-  TOKEN=${SLACK_TOKEN}
-else
-  echo "ERROR: No Slack API TOKEN was found. Can not proceed with posting messages to the API without one."
-  exit 1
 fi
 
 # ----------
@@ -206,7 +190,7 @@ function SEND() {
 
   # Send the payload to the Slack API
   echo "OK: All tests passed, sending message to Slack API..."
-  POST=$(curl -s -S -X POST --data-urlencode "${PAYLOAD}" "${WEBHOOK}${TOKEN}");
+  POST=$(curl -s -S -X POST --data-urlencode "${PAYLOAD}" "${WEBHOOK}");
 
   # Check if the message posted to the Slack API. A successful POST should return "ok". Anything other than "ok" indicates an issue
   if test "${POST}" != ok; then echo "ERROR: The POST to the Slack API failed (${POST})" && return 1; else echo "OK: Message successfully sent to the channel ${CHANNEL} via the Slack API"; fi

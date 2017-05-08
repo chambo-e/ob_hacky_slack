@@ -24,10 +24,6 @@ Second, you need create an incoming webhook. Go here to learn how: <https://api.
 
 As a result going through those two steps, you should get the following:
 
-## Slack API Tokens
-
-You need to make sure that your Slack token is set as a system variable `${SLACK_TOKEN}` or you can pass it to Hacky Slack via `-k "whatever-you-get-from-slack"`. You can also hard code it into `slack.sh` as `TOKEN="whatever-you-get-from-slack"`
-
 ## Slack API Webhook Endpoint
 
 Hacky Slack will default to the Slack API endpoint URL `<https://hooks.slack.com/services/>`. However, if you want to use a different one simply pass it via `-w "<https://whatever.slack.com/provides/>"`
@@ -91,7 +87,6 @@ Hacky Slack allowed you to pass a variety attributes as defined by the Slack mes
 -t, Text            This is the main text in a message attachment, and can contain standard message markup."
 -T, Title           The title is displayed as larger, bold text near the top of a message attachment."
 -L, Title Link      A valid URL in the will ensure the title text will be hyperlinked."
--k, Token           Authenticates the POST to Slack."
 -u, Username        User that posts the message."
 -w, Webhook         The Slack API service endpoint to POST messages. Defaults to 'https://hooks.slack.com/services/'"
 ```
@@ -116,14 +111,14 @@ slack -a -t "Hello World" -i ":slack:" -T "Titles are awesome" -p "Pretext is so
 ```
 
 ```bash
-slack -c "#general" -u "steve" -i "dog" -a "Macbook Pro" -B "http://www.apple.com/" -p "Almost" -Z "Where are the new 2016 Macbook models" -s "ok" -T "Wow" -L "https://www.apple.com" -k "213912391-2093-10293ASSJASLKA"
+slack -c "#general" -u "steve" -i "dog" -a "Macbook Pro" -B "http://www.apple.com/" -p "Almost" -Z "Where are the new 2016 Macbook models" -s "ok" -T "Wow" -L "https://www.apple.com"
 ```
 
 Here is the command represented in Slack:
 
 ![Generic Message Examples](icons/png/generic-message.png?raw=true "Generic INFO")
 
-Note: These examples assume you have set your token and webhook endpoint.
+Note: These examples assume you have set your webhook endpoint.
 
 # Hacky Slack Docker Style
 
@@ -132,7 +127,7 @@ There is a `Dockerfile` included which may simplify running the Hacky Slack. Thi
 Here is an example of running with Docker:
 
 ```bash
-docker run -it openbridge/hacky-slack slack -c "#general" -u "steve" -i "dog" -a "Macbook Pro" -B "http://www.apple.com/" -p "Almost" -Z "Where are the new 2016 Macbook models" -s "ok" -T "Wow" -L "https://www.apple.com" -k "213912391-2093-10293ASSJASLKA"
+docker run -it openbridge/hacky-slack slack -c "#general" -u "steve" -i "dog" -a "Macbook Pro" -B "http://www.apple.com/" -p "Almost" -Z "Where are the new 2016 Macbook models" -s "ok" -T "Wow" -L "https://www.apple.com"
 ```
 
 This is approach consumes a lot more space that the file alone. The total image is < 10MB. However, it might provide more flexibility in some use cases. Your mileage may vary.

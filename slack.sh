@@ -4,7 +4,7 @@
 # Environment
 # ----------
 HOSTNAME=${hostname-$(hostname -s)}
-CONFIG="/etc/slack.d"
+CONFIG="${PWD}/slack.d"
 IPCONFIG="/tmp/ip.txt"
 
 # ----------
@@ -110,13 +110,13 @@ fi
 # Service Specific Configurations
 # ----------
 # Service specific configurations are passed using -m <config>
-# For example, the include monit config (/etc/slack.d/monit) will leverage mMonit specific environment variables to set message attributes.
+# For example, the include monit config (${PWD}/slack.d/monit) will leverage mMonit specific environment variables to set message attributes.
 
 # We look for this first, if no config exists we use defaults
 
 if [[ -n "${MODE}" ]]; then
-  test -d "${CONFIG}" && echo "INFO: The ${CONFIG} direcotry exists" || echo "WARNING: The ${CONFIG} direcotry does not exist. Creating..."; mkdir -p ${CONFIG}
-  curl -o "${CONFIG}/${MODE}" -z "${CONFIG}/${MODE}" "https://raw.githubusercontent.com/gonace/ob_hacky_slack/develop/etc/slack.d/${MODE}" --verbose
+  test -d "${CONFIG}" && echo "INFO: The ${CONFIG} directory exists" || echo "WARNING: The ${CONFIG} direcotry does not exist. Creating..."; mkdir -p ${CONFIG}
+  curl -o "${CONFIG}/${MODE}" -z "${CONFIG}/${MODE}" "https://raw.githubusercontent.com/chambo-e/ob_hacky_slack/develop/slack.d/${MODE}" --verbose
   if [[ -z "${MODE}" ]]; then
     echo "INFO: No Monit variables are present"
   else

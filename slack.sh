@@ -1,20 +1,6 @@
 #!/usr/bin/env bash
 
 # ----------
-# API Endpoint
-# ----------
-# Default WEBHOOK to post messages
-if [[ -n ${WEBHOOK} ]]; then
-  echo "INFO: The Slack API WEBHOOK was passed via the command line (-w)"
-elif [[ -n ${SLACK_WEBHOOK} ]]; then
-  echo "INFO: The Slack API TOKEN was set as a system variable"
-  WEBHOOK=${SLACK_WEBHOOK}
-else
-  echo "INFO: Using default Slack API endpoint to POST messages..."
-  WEBHOOK=${WEBHOOK-'https://hooks.slack.com/services/'}
-fi
-
-# ----------
 # Environment
 # ----------
 HOSTNAME=${hostname-$(hostname -s)}
@@ -104,6 +90,20 @@ else
       w) WEBHOOK="${OPTARG}" ;;
       esac
       done
+fi
+
+# ----------
+# API Endpoint
+# ----------
+# Default WEBHOOK to post messages
+if [[ -n ${WEBHOOK} ]]; then
+  echo "INFO: The Slack API WEBHOOK was passed via the command line (-w)"
+elif [[ -n ${SLACK_WEBHOOK} ]]; then
+  echo "INFO: The Slack API WEBHOOK was set as a system variable"
+  WEBHOOK=${SLACK_WEBHOOK}
+else
+  echo "INFO: Using default Slack API endpoint to POST messages..."
+  WEBHOOK=${WEBHOOK-'https://hooks.slack.com/services/'}
 fi
 
 # ----------

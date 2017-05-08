@@ -1,5 +1,5 @@
 
-![Hack Slack](https://github.com/openbridge/ob_hacky_slack/blob/master/icons/png/slack.png "Optional title")
+![Hack Slack](https://github.com/chambo-e/ob_hacky_slack/blob/master/icons/png/slack.png "Optional title")
 # Hacky Slack: A Bash Slack API Client
 
 Hacky Slack is a bash script that will post messages to a Slack webhook API endpoint.
@@ -59,7 +59,7 @@ This assumes no conflicts exist in `/usr/bin`. Then `chmod +x /usr/bin/slack`
 If you want to include Hacky Slack directly from Github you can use wget:
 
 ```bash
-wget --no-check-certificate --directory-prefix=/usr/bin https://raw.githubusercontent.com/openbridge/ob_hacky_slack/master/slack.sh
+wget --no-check-certificate --directory-prefix=/usr/bin https://raw.githubusercontent.com/chambo-e/ob_hacky_slack/master/slack.sh
 ```
 
 Then `chmod +x /usr/bin/slack`
@@ -122,12 +122,12 @@ Note: These examples assume you have set your webhook endpoint.
 
 # Hacky Slack Docker Style
 
-There is a `Dockerfile` included which may simplify running the Hacky Slack. This assumes you have Docker installed. Simply build your image by running `docker build -t openbridge/hacky-slack .`
+There is a `Dockerfile` included which may simplify running the Hacky Slack. This assumes you have Docker installed. Simply build your image by running `docker build -t chambo-e/hacky-slack .`
 
 Here is an example of running with Docker:
 
 ```bash
-docker run -it openbridge/hacky-slack slack -c "#general" -u "steve" -i "dog" -a "Macbook Pro" -B "http://www.apple.com/" -p "Almost" -Z "Where are the new 2016 Macbook models" -s "ok" -T "Wow" -L "https://www.apple.com"
+docker run -it chambo-e/hacky-slack slack -c "#general" -u "steve" -i "dog" -a "Macbook Pro" -B "http://www.apple.com/" -p "Almost" -Z "Where are the new 2016 Macbook models" -s "ok" -T "Wow" -L "https://www.apple.com"
 ```
 
 This is approach consumes a lot more space that the file alone. The total image is < 10MB. However, it might provide more flexibility in some use cases. Your mileage may vary.

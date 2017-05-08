@@ -76,7 +76,7 @@ if [[ $# -eq 0 ]]; then
     GET_HELP
     exit 1
 else
-  while getopts ":a:A:b:B:c:C:e:h:i:I:m:N:p:s:Z:T:L:u:w" opt; do
+  while getopts ":a:A:b:B:c:C:e:h:i:I:m:N:p:s:Z:T:L:u:w:" opt; do
     case ${opt} in
       a) ATTACHMENT="true" ;;
       A) AUTHOR="${OPTARG}" ;;
